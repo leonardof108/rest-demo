@@ -62,10 +62,6 @@ You can run it using IntelliJ or from the terminal:
 - Swagger/OpenAPI docs
 - Docker support
 
-## 📸 Diagrams
-
-_You can add a simple architecture diagram here (see below)_
-
 ## 🤝 Contributing
 
 Open to suggestions, issues, and improvements!

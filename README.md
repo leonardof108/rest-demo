@@ -1,72 +1,50 @@
-# ☁️ Spring Boot Cloud Vendor API
+# 🌩️ Cloud Vendor REST API (Spring Boot)
 
-A simple RESTful API built with **Spring Boot** that manages cloud vendor data.
+This is a simple RESTful web service built using Spring Boot, demonstrating clean architecture and best practices such as service separation, persistence with Spring Data JPA, and in-memory database using H2. Designed as a base for deeper concepts like testing, security, CI/CD, Docker, and more.
 
-## 🚀 Features
-
-- Create, update, retrieve, and delete cloud vendor details
-- Follows REST architecture
-- Built using Java 17 and Spring Boot
-- Clean and minimal codebase (great for beginners!)
-
-## 🛆 Tech Stack
+## 🔧 Tech Stack
 
 - Java 17
-- Spring Boot
+- Spring Boot (Web, Data JPA)
+- H2 (In-memory Database)
 - Maven
-- REST API
 
-## 🔧 Getting Started
+## 📦 Features
 
-### 1. Clone the repository
+- CRUD operations for Cloud Vendors
+- Persistence using Spring Data JPA
+- Service layer separation
+- In-memory H2 database
+- RESTful endpoints
 
-```bash
-git clone https://github.com/your-username/spring-boot-cloud-vendor-api.git
-cd spring-boot-cloud-vendor-api
-```
+## 🚀 Endpoints
 
-### 2. Run the application
+| Method | Endpoint               | Description                |
+|--------|------------------------|----------------------------|
+| GET    | `/cloudvendor`         | Get all cloud vendors      |
+| GET    | `/cloudvendor/{id}`    | Get vendor by ID           |
+| POST   | `/cloudvendor`         | Create a new vendor        |
+| PUT    | `/cloudvendor`         | Update a vendor            |
+| DELETE | `/cloudvendor/{id}`    | Delete vendor by ID        |
 
-You can run it using IntelliJ or from the terminal:
+## 🛠 How to Run
 
-```bash
-./mvnw spring-boot:run
-```
+1. Clone the repository  
+2. Open in IntelliJ or your preferred IDE  
+3. Run `RestDemoApplication.java`  
+4. Access the API at `http://localhost:8080/cloudvendor`  
+5. H2 Console: `http://localhost:8080/h2-console`  
+   - JDBC URL: `jdbc:h2:mem:clouddb`  
+   - User: `sa`, Password: *(leave blank)*
 
-> Make sure you have JDK 17 and Maven installed.
+## 📌 Future Enhancements
 
-## 🧲 API Endpoints
+- Bean validation for input data  
+- Global exception handling  
+- Spring Security  
+- Unit & integration tests  
+- Docker & containerization  
+- CI/CD pipelines  
+- Cloud deployment
 
-| Method | Endpoint              | Description                  |
-|--------|-----------------------|------------------------------|
-| GET    | `/cloudvendors/{id}`   | Get vendor details           |
-| POST   | `/cloudvendors`        | Create a new vendor          |
-| PUT    | `/cloudvendors`        | Update an existing vendor    |
-| DELETE | `/cloudvendors/{id}`   | Delete a vendor              |
-
-### Example JSON for POST/PUT
-
-```json
-{
-  "vendorId": "AWS123",
-  "vendorName": "Amazon Web Services",
-  "vendorAddress": "Seattle, WA",
-  "vendorPhoneNumber": "1800-123-456"
-}
-```
-
-## 📈 Roadmap
-
-- Add persistence layer using Spring Data JPA + H2/PostgreSQL
-- Add validation and exception handling
-- Swagger/OpenAPI docs
-- Docker support
-
-## 🤝 Contributing
-
-Open to suggestions, issues, and improvements!
-
-## 📢 Contact
-
-Created by [@leonardof108](https://github.com/leonardof108)
-
+---

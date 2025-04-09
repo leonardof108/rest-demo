@@ -3,7 +3,6 @@ package com.leonardof108.rest_demo.controller;
 import com.leonardof108.rest_demo.model.CloudVendor;
 import com.leonardof108.rest_demo.service.CloudVendorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,37 +12,30 @@ import java.util.List;
 public class CloudVendorController {
 
     @Autowired
-    private CloudVendorService cloudVendorService;
+    private CloudVendorService service;
 
     @GetMapping("/{vendorId}")
-    public ResponseEntity<CloudVendor> getVendor(@PathVariable String vendorId) {
-        CloudVendor vendor = cloudVendorService.getVendorById(vendorId);
-        if (vendor == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(vendor);
+    public CloudVendor getVendor(@PathVariable String vendorId) {
+        return service.getVendorById(vendorId);
     }
 
     @GetMapping
-    public ResponseEntity<List<CloudVendor>> getAllVendors() {
-        return ResponseEntity.ok(cloudVendorService.getAllVendors());
+    public List<CloudVendor> getAllVendors() {
+        return service.getAllVendors();
     }
 
     @PostMapping
-    public ResponseEntity<String> createVendor(@RequestBody CloudVendor cloudVendor) {
-        cloudVendorService.createVendor(cloudVendor);
-        return ResponseEntity.status(201).body("Vendor created successfully");
+    public String createVendor(@RequestBody CloudVendor vendor) {
+        return service.createVendor(vendor);
     }
 
     @PutMapping
-    public ResponseEntity<String> updateVendor(@RequestBody CloudVendor cloudVendor) {
-        cloudVendorService.updateVendor(cloudVendor);
-        return ResponseEntity.ok("Vendor updated successfully");
+    public String updateVendor(@RequestBody CloudVendor vendor) {
+        return service.updateVendor(vendor);
     }
 
     @DeleteMapping("/{vendorId}")
-    public ResponseEntity<String> deleteVendor(@PathVariable String vendorId) {
-        cloudVendorService.deleteVendor(vendorId);
-        return ResponseEntity.ok("Vendor deleted successfully");
+    public String deleteVendor(@PathVariable String vendorId) {
+        return service.deleteVendor(vendorId);
     }
 }

@@ -1,6 +1,12 @@
 package com.leonardof108.rest_demo.model;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class CloudVendor {
+    @Id
     private String vendorId;
     private String vendorName;
     private String vendorAddress;

@@ -3,15 +3,12 @@ package com.leonardof108.rest_demo.controller;
 import com.leonardof108.rest_demo.model.CloudVendor;
 import com.leonardof108.rest_demo.service.CloudVendorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/cloudvendor")
@@ -21,35 +18,35 @@ public class CloudVendorController {
     private CloudVendorService service;
 
     @GetMapping("/{vendorId}")
-    public CloudVendor getVendor(@PathVariable String vendorId) {
-        return service.getVendorById(vendorId);
+    public ResponseEntity<CloudVendor> getVendor(@PathVariable String vendorId) {
+        CloudVendor vendor = service.getVendorById(vendorId);
+        if (vendor != null) {
+            return ResponseEntity.ok(vendor);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping
-    public List<CloudVendor> getAllVendors() {
-        return service.getAllVendors();
+    public ResponseEntity<List<CloudVendor>> getAllVendors() {
+        List<CloudVendor> vendors = service.getAllVendors();
+        return ResponseEntity.ok(vendors);
     }
 
     @PostMapping
-    public String createVendor(@Valid @RequestBody CloudVendor vendor) {
-        return service.createVendor(vendor);
+    public ResponseEntity<String> createVendor(@Valid @RequestBody CloudVendor vendor) {
+        String response = service.createVendor(vendor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping
-    public String updateVendor(@Valid @RequestBody CloudVendor vendor) {
-        return service.updateVendor(vendor);
+    public ResponseEntity<String> updateVendor(@Valid @RequestBody CloudVendor vendor) {
+        String response = service.updateVendor(vendor);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{vendorId}")
-    public String deleteVendor(@PathVariable String vendorId) {
-        return service.deleteVendor(vendorId);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> 
-            errors.put(error.getField(), error.getDefaultMessage()));
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> deleteVendor(@PathVariable String vendorId) {
+        String response = service.deleteVendor(vendorId);
+        return ResponseEntity.ok(response);
     }
 }

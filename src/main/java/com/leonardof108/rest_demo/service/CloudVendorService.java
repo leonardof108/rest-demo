@@ -13,6 +13,10 @@ public class CloudVendorService {
     @Autowired
     private CloudVendorRepository repository;
 
+    private String sanitizeField(String field) {
+        return field != null ? field.trim() : null;
+    }
+
     public CloudVendor getVendorById(String vendorId) {
         return repository.findById(vendorId).orElse(null);
     }
@@ -22,11 +26,19 @@ public class CloudVendorService {
     }
 
     public String createVendor(CloudVendor vendor) {
+        vendor.setVendorId(sanitizeField(vendor.getVendorId()));
+        vendor.setVendorName(sanitizeField(vendor.getVendorName()));
+        vendor.setVendorAddress(sanitizeField(vendor.getVendorAddress()));
+        vendor.setVendorPhoneNumber(sanitizeField(vendor.getVendorPhoneNumber()));
         repository.save(vendor);
         return "Vendor created successfully!";
     }
 
     public String updateVendor(CloudVendor vendor) {
+        vendor.setVendorId(sanitizeField(vendor.getVendorId()));
+        vendor.setVendorName(sanitizeField(vendor.getVendorName()));
+        vendor.setVendorAddress(sanitizeField(vendor.getVendorAddress()));
+        vendor.setVendorPhoneNumber(sanitizeField(vendor.getVendorPhoneNumber()));
         repository.save(vendor);
         return "Vendor updated successfully!";
     }

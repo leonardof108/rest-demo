@@ -7,20 +7,29 @@ This is a simple RESTful web service built using Spring Boot, demonstrating clea
 - Java 17
 - Spring Boot
 - Spring Data JPA
+- Spring Web
+- Spring Security
+- Spring Validation
 - PostgreSQL
 - Lombok
 - Jakarta Validation
+- JUnit & Mockito
 - Maven
 
 ## 📦 Features
 
 - ✅ CRUD operations for managing cloud vendors
+- ✅ Input validation with Jakarta Validation
+- ✅ Centralized exception handling
+- ✅ Clean API responses with ResponseEntity
+- ✅ Basic HTTP authentication
 - ✅ RESTful endpoints
-- ✅ Switched from in-memory H2 database to PostgreSQL for persistence using Spring Data JPA
+- ✅ PostgreSQL for persistence using Spring Data JPA
 - ✅ Service layer separation
 - ✅ Reduced boilerplate with **Project Lombok**
-- ✅ Added **validation annotations** with Jakarta Validation (`@NotBlank`, `@Pattern`)
-- ✅ Implemented exception handling for invalid inputs (currently handled in-controller)
+- ✅ **validation annotations** with Jakarta Validation (`@NotBlank`, `@Pattern`)
+- ✅ Input sanitization
+- ✅ Unit testing with JUnit & Mockito
 
 
 ## 🚀 Endpoints
@@ -33,6 +42,28 @@ This is a simple RESTful web service built using Spring Boot, demonstrating clea
 | PUT    | `/cloudvendor`         | Update a vendor            |
 | DELETE | `/cloudvendor/{id}`    | Delete vendor by ID        |
 
+All endpoints require Basic Auth (admin / admin123 by default)
+
+## ✅ Validation
+
+- Vendor ID, name, address, and phone number must not be blank.
+- Phone number must be 10 digits.
+- Errors are returned in a standardized JSON format.
+
+## 🔐 Authentication
+- Enabled with Spring Security using HTTP Basic Auth.
+- Update credentials in application.properties.
+
+## 🧪 Testing
+- Unit tests for service and controller layers.
+- Used Mockito for mocking dependencies.
+- Added spring-security-test for future integration tests.
+
+## 🗄️ Database
+- Using PostgreSQL.
+- Ensure your local PostgreSQL instance has a database named clouddb.
+- Update credentials in application.properties.
+
 ## 🛠 How to Run
 
 1. Clone the repository  
@@ -42,10 +73,6 @@ This is a simple RESTful web service built using Spring Boot, demonstrating clea
 
 ## 📌 Future Enhancements
 
-- Centralize exception handling using `@RestControllerAdvice`
-- Improve API response formats with `ResponseEntity`
-- Add unit and integration testing
-- Implement security with Spring Security
 - Containerize the application (Docker)
 - CI/CD & Cloud deployment
 

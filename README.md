@@ -15,6 +15,9 @@ This is a simple RESTful web service built using Spring Boot, demonstrating clea
 - Jakarta Validation
 - JUnit & Mockito
 - Maven
+- Docker
+- Docker compose
+- Swagger
 
 ## 📦 Features
 
@@ -30,6 +33,13 @@ This is a simple RESTful web service built using Spring Boot, demonstrating clea
 - ✅ **validation annotations** with Jakarta Validation (`@NotBlank`, `@Pattern`)
 - ✅ Input sanitization
 - ✅ Unit testing with JUnit & Mockito
+- ✅ Dockerized the app with a production-style Dockerfile
+- ✅ Created a multi-container setup via docker-compose.yml
+- ✅ Set up PostgreSQL as a separate service
+- ✅ Added healthcheck to ensure DB readiness
+- ✅ Added Springdoc + Swagger UI for auto-generated API docs
+- ✅ Added Actuator for potential monitoring endpoints
+- ✅ Completely platform-independent
 
 
 ## 🚀 Endpoints
@@ -64,16 +74,36 @@ All endpoints require Basic Auth (admin / admin123 by default)
 - Ensure your local PostgreSQL instance has a database named clouddb.
 - Update credentials in application.properties.
 
-## 🛠 How to Run
+## 📦 Swagger/OpenAPI
 
-1. Clone the repository  
-2. Open in IntelliJ or your preferred IDE  
-3. Run `RestDemoApplication.java`  
-4. Access the API at `http://localhost:8080/cloudvendor`
+I've added Swagger UI to auto-document and explore API endpoints. Springdoc is used for OpenAPI 3.0 integration.
+
+## 🐳 Docker & Docker Compose
+
+This project includes Docker support for containerized deployment.
+
+### Running the App
+
+1. Clone the repository
+2. Build and start services:
+```bash
+docker-compose up --build
+```
+App will be accessible at: `http://localhost:8080`
+Swagger API docs: `http://localhost:8080/swagger-ui/index.html`
+
+
+Service	Description	Port
+App	Spring Boot REST API	8080
+Database	PostgreSQL (clouddb)	5432
+
+| Service | Description               | Port                |
+|--------|------------------------|----------------------------|
+| App    | Spring Boot REST API         | 8080      |
+| Database    | PostgreSQL (clouddb)    | 5432    |
 
 ## 📌 Future Enhancements
 
-- Containerize the application (Docker)
 - CI/CD & Cloud deployment
 
 ---
